@@ -3,9 +3,12 @@ import { UserDetails } from "../models/userModel";
 import { hashPassword } from "../helpers/hashPassword";
 import { generateJwtToken } from "../helpers/createJWTToken";
 import { Result, ValidationError, check, validationResult } from "express-validator";
+import { comparePassword } from "../helpers/comparePassword";
 
 export const registerUser = async (req: Request, res: Response) => {
   try {
+
+    // console.log(req?.body)
     //Getting user data
     const { name, username, email, password, confirmpassword } = req.body;
 
@@ -72,3 +75,37 @@ export const registerUser = async (req: Request, res: Response) => {
     return res.status(400).json({ error });
   }
 };
+
+
+export const loginUser = async(req : Request,res:Response) =>{
+  try {
+    const {email,password} = req.body;
+
+    check("email", "Email must be provided").isEmail();
+    check("password", "Password must be provided").isLength({ min: 1 });
+
+    const errors : Result<ValidationError> = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
+    const userExistOrNot = await UserDetails.findOne({ email });
+
+    let passwordMatch;
+
+    if(!userExistOrNot)
+        return res.status(500).json({error:"No user exists"})
+    else{
+      passwordMatch = await comparePassword(password,userExistOrNot?.password as string)
+      
+    }
+
+    if(!passwordMatch)
+      return res.status(400).json({error:"Invalid Credentials"})
+
+    return res.status(200).json({message:"Logged in Successfully"})
+
+  } catch (error) {
+    return res.status(500).json({error})
+  }
+}
