@@ -7,7 +7,7 @@ export const generateJwtToken = async(userId: any,res : Response)=>{
         expiresIn : "3d"
     })
 
-    console.log("Token",token)
+    // console.log("Token",token)
 
     res.cookie("auth_token", token, {
         httpOnly: true,

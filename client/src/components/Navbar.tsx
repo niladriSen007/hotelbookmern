@@ -14,10 +14,28 @@ const Navbar = () => {
           Homify
         </span>
         <div className="flex items-center gap-10 text-sm">
-          <span className="cursor-pointer hover:font-bold">Categories</span>
-          <span className="cursor-pointer hover:font-bold">Become a host</span>
-          <span className="cursor-pointer hover:font-bold">Terms</span>
-          <span className="cursor-pointer hover:font-bold">FAQs</span>
+          <span className="overflow-y-hidden">
+            {"Categories".split("").map((c) => (
+              <span className="font-thin hover:font-black hover:m-1 cursor-pointer hover:text-4xl hover:font-mono transition-all duration-300 ">
+                {c}
+              </span>
+            ))}
+          </span>
+          <span className="overflow-y-hidden"> {"Become a host".split("").map((c) => (
+              <span className="font-thin hover:font-black cursor-pointer hover:text-3xl hover:font-mono transition-all duration-300 ">
+                {c}
+              </span>
+            ))}</span>
+          <span className="overflow-y-hidden"> {"Terms".split("").map((c) => (
+              <span className="font-thin hover:font-black cursor-pointer hover:text-3xl hover:font-mono transition-all duration-300 ">
+                {c}
+              </span>
+            ))}</span>
+          <span className="overflow-y-hidden"> {"FAQs".split("").map((c) => (
+              <span className="font-thin hover:font-black cursor-pointer hover:text-3xl hover:font-mono transition-all duration-300 ">
+                {c}
+              </span>
+            ))}</span>
         </div>
       </div>
       <div className="flex items-center gap-10">
