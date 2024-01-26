@@ -9,31 +9,36 @@ const App = () => {
   const Layout = () => (
     <>
       <Navbar />
-     
       <div>
         <Outlet />
       </div>
     </>
   );
 
+
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/home",
       element: <Layout />,
       children: [
         {
-          path: "/",
+          path: "/home",
           element: <Home />,
         },
       ],
     },
     {
-      path:"/register",
-      element : <Register />
-    },
-    {
-      path:"/login",
-      element : <Login />
+      path:"/",
+      children:[
+        {
+          path:"/register",
+          element : <Register />
+        },
+        {
+          path:"/",
+          element : <Login />
+        }
+      ]
     }
   ]);
 

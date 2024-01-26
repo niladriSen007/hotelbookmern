@@ -1,4 +1,5 @@
 import { FormData } from "@/types/formData";
+import { LoginFormData } from "@/types/loginFormData";
 import axios from "axios";
 // import "dotenv/config"
 
@@ -9,6 +10,8 @@ export const regitser = async (formData: FormData) => {
   try {
     const { data } = await axios.post(`${API_BASE_URL}/api/auth/v1/register`, {
       ...formData,
+    },{
+      withCredentials:true
     });
     console.log(data)
     return data
@@ -18,11 +21,11 @@ export const regitser = async (formData: FormData) => {
 };
 
 
-export const login = async (formData: FormData) => {
+export const login = async (loginFormData: LoginFormData) => {
     console.log(API_BASE_URL)
   try {
     const { data } = await axios.post(`${API_BASE_URL}/api/auth/v1/login`, {
-      ...formData,
+      ...loginFormData,
     });
     console.log(data)
     return data
