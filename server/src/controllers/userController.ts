@@ -103,8 +103,31 @@ export const loginUser = async(req : Request,res:Response) =>{
     if(!passwordMatch)
       return res.status(400).json({error:"Invalid Credentials"})
 
+      const token = await generateJwtToken(userExistOrNot?._id, res);
+
     return res.status(200).json({message:"Logged in Successfully"})
 
+  } catch (error) {
+    return res.status(500).json({error})
+  }
+}
+
+
+export const validateToken =async (req:Request,res:Response) => {
+  try {
+    res.status(200).send({ userId: req.userId });
+  } catch (error) {
+    return res.status(500).json({error})
+  }
+}
+
+
+export const logout =async (req:Request,res:Response) => {
+  try {
+    res.cookie("auth_token", "", {
+      expires: new Date(0),
+    });
+    res.send();
   } catch (error) {
     return res.status(500).json({error})
   }
