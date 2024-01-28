@@ -4,17 +4,18 @@ import { BiSolidBellRing } from "react-icons/bi";
 import { Button } from "./ui/button";
 import { useHotelContext } from "@/context/AppContext";
 import Logout from "./Logout";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   
   const { isLoggedIn } = useHotelContext()
 
   return (
-    <nav className="bg-slate-900 w-screen h-16 flex items-center justify-between px-12">
+    <nav className="backdrop-blur-xl  shadow-2xl  bg-slate-900 to-violet-950 w-screen h-16 flex items-center justify-between px-12">
       <div className="flex items-center gap-12 text-white ">
-        <span className="border-r-2 border-gray-700 pr-12 font-bold text-lg">
+        <Link to="/home" className="border-r-2 border-gray-700 pr-12 font-black text-xl">
           Homify
-        </span>
+        </Link>
         <div className="flex items-center gap-10 text-sm">
           <span className="overflow-y-hidden">
             {"Categories".split("").map((c) => (
@@ -41,9 +42,9 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex items-center gap-10">
-        <div className="text-white">
+        <Link to={"/home/addHotel"} className="text-white">
           <TbCategoryPlus size={22} />
-        </div>
+        </Link>
         <div className="text-white">
           <BiSolidBellRing size={22} />
         </div>

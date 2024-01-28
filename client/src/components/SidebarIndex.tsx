@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FaCircleChevronLeft, FaCircleChevronRight } from "react-icons/fa6";
 import SidebarMenu from "./SidebarMenu";
 import Sidebar from "./Sidebar";
 const SidebarIndex = () => {
