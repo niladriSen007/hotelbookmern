@@ -26,6 +26,8 @@ export const login = async (loginFormData: LoginFormData) => {
   try {
     const { data } = await axios.post(`${API_BASE_URL}/api/auth/v1/login`, {
       ...loginFormData,
+    },{
+      withCredentials:true
     });
     console.log(data)
     return data
@@ -33,3 +35,22 @@ export const login = async (loginFormData: LoginFormData) => {
     throw new Error(error as string);
   }
 };
+
+export const validateToken =async () => {
+  const {data} = await axios.get(`${API_BASE_URL}/api/auth/v1/validateToken`,{withCredentials:true})
+
+  if(!data)
+    throw new Error("Token Invalid")
+
+  return data;
+}
+
+
+export const logout = async()=>{
+  try {
+    const {data} = await axios.post(`${API_BASE_URL}/api/auth/v1/logout`,{},{withCredentials:true})
+    console.log(data)
+  } catch (error) {
+    throw new Error("Error during sign out");
+  }
+}

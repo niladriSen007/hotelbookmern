@@ -1,11 +1,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TbCategoryPlus } from "react-icons/tb";
 import { BiSolidBellRing } from "react-icons/bi";
-import { FiLogOut } from "react-icons/fi";
 import { Button } from "./ui/button";
+import { useHotelContext } from "@/context/AppContext";
+import Logout from "./Logout";
 
 const Navbar = () => {
-  const currentUser = true;
+  
+  const { isLoggedIn } = useHotelContext()
 
   return (
     <nav className="bg-slate-900 w-screen h-16 flex items-center justify-between px-12">
@@ -45,15 +47,13 @@ const Navbar = () => {
         <div className="text-white">
           <BiSolidBellRing size={22} />
         </div>
-        {currentUser ? (
+        {isLoggedIn ? (
           <>
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <div className="text-white">
-              <FiLogOut size={22} />
-            </div>
+            <Logout />
           </>
         ) : (
           <>
