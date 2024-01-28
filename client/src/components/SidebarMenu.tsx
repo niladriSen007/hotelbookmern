@@ -1,6 +1,10 @@
 import { sidebarMenuData } from "../utils/sidebarMenuData";
-import { FaCircleChevronLeft, FaCircleChevronRight } from "react-icons/fa6";
-const SidebarMenu = ({ setExtendSidebar }) => {
+import { FaCircleChevronLeft } from "react-icons/fa6";
+
+type Props = {
+  setExtendSidebar: (val: boolean) => void;
+};
+const SidebarMenu = ({ setExtendSidebar }: Props) => {
   return (
     <section className="p-4 mx-2 pt-12  rounded-xl w-52 bg-slate-900 backdrop-blur-lg text-white  relative">
       <div className="absolute right-4 top-4 z-50 cursor-pointer">

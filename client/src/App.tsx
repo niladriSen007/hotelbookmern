@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import AddHotel from "./pages/AddHotel";
 
 const App = () => {
   const Layout = () => (
@@ -24,6 +25,10 @@ const App = () => {
         {
           path: "/home",
           element: <Home />,
+        },
+        {
+          path: "/home/addHotel",
+          element: <AddHotel />,
         },
       ],
     },
