@@ -1,4 +1,5 @@
 import { FormData } from "@/types/formData";
+import { HotelFormData } from "@/types/hotelFormData";
 import { LoginFormData } from "@/types/loginFormData";
 import axios from "axios";
 // import "dotenv/config"
@@ -53,4 +54,9 @@ export const logout = async()=>{
   } catch (error) {
     throw new Error("Error during sign out");
   }
+}
+
+
+export const addHotel =async (hotelFormData : HotelFormData) => {
+  
 }
