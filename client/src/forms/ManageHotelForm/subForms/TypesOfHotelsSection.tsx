@@ -10,7 +10,7 @@ const TypesOfHotelsSection = () => {
   } = useFormContext<HotelFormData>();
 
   const typeWatch = watch("type");
-  console.log(typeWatch)
+  // console.log(typeWatch)
 
   return (
     <div className="px-3 my-6">

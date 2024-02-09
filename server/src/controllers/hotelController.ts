@@ -1,35 +1,18 @@
 import { Request, Response } from "express";
-import { body } from "express-validator";
-import multer from "multer";
-import cloudinary from "cloudinary";
+
 import { HotelDetails } from "../models/hotelModel";
 import { uploadImages } from "../helpers/uploadImages";
 import { HotelType } from "../types/hotelType";
 
-const storage = multer.memoryStorage();
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024,
-  },
-});
+
 
 export const addHotel = async (req: Request, res: Response) => {
+
+  // console.log(req?.body)
+
   try {
-    body("name").notEmpty().withMessage("Name is Required"),
-      body("city").notEmpty().withMessage("City is required"),
-      body("country").notEmpty().withMessage("Country is required"),
-      body("description").notEmpty().withMessage("Description is required"),
-      body("type").notEmpty().withMessage("Hotel type is required"),
-      body("pricePerNight")
-        .notEmpty()
-        .isNumeric()
-        .withMessage("Price per night is required and must be a number"),
-      body("facilities")
-        .notEmpty()
-        .isArray()
-        .withMessage("Facilities are required"),
-    upload.array("imageFiles", 6);
+   
+
     const imgFiles = req?.files as Express.Multer.File[];
     const newHotel: HotelType = req.body;
 
@@ -47,3 +30,25 @@ export const addHotel = async (req: Request, res: Response) => {
     return res.status(401).json({ error });
   }
 };
+
+
+
+export const getAllHotels = async (req: Request, res: Response) => {
+  try {
+    const hotels = await HotelDetails.find();
+    return res.status(200).json({ hotels });
+  } catch (error) {
+    return res.status(401).json({ error });
+  }
+};
+
+
+
+export const getMyHotels = async (req: Request, res: Response) => {
+  try {
+    const hotels = await HotelDetails.find({ userId: req?.userId });
+    return res.status(200).json({ hotels });
+  } catch (error) {
+    return res.status(401).json({ error });
+  }
+}
