@@ -20,7 +20,8 @@ export const verifyAuthorization = async (
       return res.status(401).json({ message: "unauthorized" });
     }
     const user = jwt.verify(token,process.env.JWT_SECRET as string)
-    req.userId = (user as JwtPayload).userId;
+    console.log(user)
+    req.userId = (user as JwtPayload).id;
     next()
   } catch (error) {
     return res.status(500).json({ error });

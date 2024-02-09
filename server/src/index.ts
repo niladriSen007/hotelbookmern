@@ -34,7 +34,7 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth",userRouter)
-app.use("/api/hotel",userRouter)
+app.use("/api/hotel",hotelRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`);

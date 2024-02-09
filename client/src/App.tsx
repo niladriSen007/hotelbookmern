@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AddHotel from "./pages/AddHotel";
+import MyHotels from "./pages/MyHotels";
 
 const App = () => {
   const Layout = () => (
@@ -30,6 +31,10 @@ const App = () => {
           path: "/home/addHotel",
           element: <AddHotel />,
         },
+        {
+          path: "/home/myHotels",
+          element: <MyHotels />,
+        },
       ],
     },
     {
@@ -50,3 +55,10 @@ const App = () => {
   return <RouterProvider router={router} />;
 };
 export default App;
+
+
+
+
+
+
+

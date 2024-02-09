@@ -6,37 +6,47 @@ import FacilitiesSection from "./subForms/FacilitiesSection";
 import GuestsSection from "./subForms/GuestsSection";
 import ImagesSection from "./subForms/ImagesSection";
 
-const ManageHotelForm = () => {
+
+type Props = {
+  onSave: (hotelFormData: FormData) => void,
+  isPending: boolean
+}
+
+const ManageHotelForm = ({onSave,isPending}:Props) => {
   const formMethods = useForm<HotelFormData>();
   const { handleSubmit } = formMethods;
 
   const onSubmit = handleSubmit((formDataJson : HotelFormData)=>{
-    // console.log(formData)
-    const formData = new FormData()
+    // console.log(formDataJson.name)
+    const formDataNew = new FormData()
 
-    formData.append("name", formDataJson.name);
-    formData.append("city", formDataJson.city);
-    formData.append("country", formDataJson.country);
-    formData.append("description", formDataJson.description);
-    formData.append("type", formDataJson.type);
-    formData.append("pricePerNight", formDataJson.pricePerNight.toString());
-    formData.append("starRating", formDataJson.starRating.toString());
-    formData.append("adultCount", formDataJson.adultCount.toString());
-    formData.append("childCount", formDataJson.childCount.toString());
+    formDataNew.append('name', formDataJson.name);
+    formDataNew.append('description', formDataJson.description);
+    formDataNew.append('type', formDataJson.type);
+    formDataNew.append('city', formDataJson.city);
+    formDataNew.append('country', formDataJson.country);
+    formDataNew.append("pricePerNight", formDataJson.pricePerNight.toString());
+    formDataNew.append("starRating", formDataJson.starRating.toString());
+    formDataNew.append("adultCount", formDataJson.adultCount.toString());
+    formDataNew.append("childCount", formDataJson.childCount.toString());
 
     formDataJson.facilities.forEach((facility, index) => {
-      formData.append(`facilities[${index}]`, facility);
+      formDataNew.append(`facilities[${index}]`, facility);
     });
 
     Array.from(formDataJson.imageFiles).forEach((imageFile) => {
-      formData.append(`imageFiles`, imageFile);
+      formDataNew.append(`imageFiles`, imageFile);
     });
+
+    console.log(formDataNew.get('name'))
+
+    onSave(formDataNew)
     
   })
   
   return (
     <FormProvider {...formMethods}>
-      <form className="bg-gradient-to-b from-slate-900 to-violet-950 p-6 rounded-lg shadow-2xl mx-64" onSubmit={onSubmit}>
+      <form className="p-6 mx-64 rounded-lg shadow-2xl bg-gradient-to-b from-slate-900 to-violet-950" onSubmit={onSubmit}>
         <DetailsSection />
         <TypesOfHotelsSection />
         <FacilitiesSection />
@@ -44,11 +54,11 @@ const ManageHotelForm = () => {
         <ImagesSection />
         <span className="flex justify-end mr-2">
           <button
-            // disabled={true}
+            disabled={isPending}
             type="submit"
-            className="bg-violet-800 text-white px-6 py-2 font-bold hover:bg-violet-700 transition-all duration-300  rounded-md disabled:bg-gray-400"
+            className="px-6 py-2 font-bold text-white transition-all duration-300 rounded-md bg-violet-800 hover:bg-violet-700 disabled:bg-gray-400"
           >
-            Confirm
+            {isPending ? "Saving..." : "Confirm"}
           </button>
         </span>
       </form>

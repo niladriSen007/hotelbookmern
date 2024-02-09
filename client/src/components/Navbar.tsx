@@ -8,34 +8,38 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   
+
+
   const { isLoggedIn } = useHotelContext()
 
+
   return (
-    <nav className="backdrop-blur-xl  shadow-2xl  bg-slate-900 to-violet-950 w-screen h-16 flex items-center justify-between px-12">
+    <nav className="flex items-center justify-between w-screen h-16 px-12 shadow-2xl backdrop-blur-xl bg-slate-900 to-violet-950">
       <div className="flex items-center gap-12 text-white ">
-        <Link to="/home" className="border-r-2 border-gray-700 pr-12 font-black text-xl">
+        <Link to="/home" className="pr-12 text-xl font-black border-r-2 border-gray-700">
           Homify
         </Link>
         <div className="flex items-center gap-10 text-sm">
-          <span className="overflow-y-hidden">
+          {/* <span className="overflow-y-hidden">
             {"Categories".split("").map((c) => (
-              <span className="font-thin hover:font-black hover:m-1 cursor-pointer hover:text-4xl hover:font-mono transition-all duration-300 ">
+              <span className="font-thin transition-all duration-300 cursor-pointer hover:font-black hover:m-1 hover:text-4xl hover:font-mono ">
                 {c}
               </span>
             ))}
-          </span>
+          </span> */}
+          <Link to={"/home/myHotels"} className="transition-all duration-300 hover:font-black hover:text-base">My hotels</Link>
           <span className="overflow-y-hidden"> {"Become a host".split("").map((c) => (
-              <span className="font-thin hover:font-black cursor-pointer hover:text-3xl hover:font-mono transition-all duration-300 ">
+              <span className="font-thin transition-all duration-300 cursor-pointer hover:font-black hover:text-3xl hover:font-mono ">
                 {c}
               </span>
             ))}</span>
           <span className="overflow-y-hidden"> {"Terms".split("").map((c) => (
-              <span className="font-thin hover:font-black cursor-pointer hover:text-3xl hover:font-mono transition-all duration-300 ">
+              <span className="font-thin transition-all duration-300 cursor-pointer hover:font-black hover:text-3xl hover:font-mono ">
                 {c}
               </span>
             ))}</span>
           <span className="overflow-y-hidden"> {"FAQs".split("").map((c) => (
-              <span className="font-thin hover:font-black cursor-pointer hover:text-3xl hover:font-mono transition-all duration-300 ">
+              <span className="font-thin transition-all duration-300 cursor-pointer hover:font-black hover:text-3xl hover:font-mono ">
                 {c}
               </span>
             ))}</span>
@@ -58,7 +62,7 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Button className="bg-blue-700 text-white hover:bg-blue-800">
+            <Button className="text-white bg-blue-700 hover:bg-blue-800">
               Login
             </Button>
           </>
